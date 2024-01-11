@@ -21,5 +21,6 @@ jobs:
     - name: Katalon Studio Github Action
       uses: katalon-studio/katalon-studio-github-action@v2
       with:
+        version: '7.5.5'
         projectPath: ${{ github.workspace }}
         args: '-noSplash -retry=0 -testSuiteCollectionPath="Test Suites/Smoke Tests for API Demos App" -apiKey=${{ secrets.API_KEY }} -browserType="Android"'
