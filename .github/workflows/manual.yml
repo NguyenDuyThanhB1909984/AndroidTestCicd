@@ -12,7 +12,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Create Windows User
-      run: New-LocalUser -Name "newuser" -Password (ConvertTo-SecureString "password" -AsPlainText -Force) -FullName "New User" -Description "Description of New User" -AccountNeverExpires
+      run: New-LocalUser -Name "newuser" -Password (ConvertTo-SecureString "StrongPassword123!" -AsPlainText -Force) -FullName "New User" -Description "Description of New User" -AccountNeverExpires
 
     - name: Grant Admin Rights
       run: Add-LocalGroupMember -Group "Administrators" -Member "newuser"
