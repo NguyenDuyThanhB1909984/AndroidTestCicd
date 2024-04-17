@@ -1,19 +1,20 @@
 name: CI
+
 on:
   workflow_dispatch:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+
+
 jobs:
   build:
     runs-on: windows-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Katalon Studio Github Action
-      uses: katalon-studio/katalon-studio-github-action@v2.1
-      with:
-          version: '7.5.5'
-          projectPath: '${{ github.workspace }}'
-          args: '-noSplash -retry=0 -browserType=Chrome -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest" -apiKey= ${{ secrets.API_KEY }} --config -webui.autoUpdateDrivers=true'
+
+    - name: Create Windows User
+      run: New-LocalUser -Name "newuser" -Password (ConvertTo-SecureString "password" -AsPlainText -Force) -FullName "New User" -Description "Description of New User" -AccountNeverExpires
+
+    - name: Grant Admin Rights
+      run: Add-LocalGroupMember -Group "Administrators" -Member "newuser"
+
+    # Bổ sung các bước tiếp theo tại đây nếu cần
